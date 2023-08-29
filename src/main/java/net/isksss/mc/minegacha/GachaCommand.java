@@ -20,27 +20,13 @@ public class GachaCommand implements CommandExecutor {
     private Random random = new Random();
 
     public GachaCommand(){
-        // アイテムと重みをリストに追加
-        int WEIGHT_1 = 3;
-        int WEIGHT_2 = 5;
-        int WEIGHT_3 = 10;
-        int WEIGHT_4 = 15;
-        int WEIGHT_5 = 20;
-        addItemWithWeight(new ItemStack(Material.ELYTRA,1), WEIGHT_1);
-        addItemWithWeight(new ItemStack(Material.NETHERITE_INGOT,3), WEIGHT_1);
-
-        addItemWithWeight(new ItemStack(Material.NETHERITE_INGOT,1), WEIGHT_2);
-        addItemWithWeight(new ItemStack(Material.DIAMOND,8), WEIGHT_2);
-
-        addItemWithWeight(new ItemStack(Material.DIAMOND,4), WEIGHT_3);
-        addItemWithWeight(new ItemStack(Material.GOLD_INGOT,16), WEIGHT_3);
-        addItemWithWeight(new ItemStack(Material.EXPERIENCE_BOTTLE,32), WEIGHT_3);
-
-        addItemWithWeight(new ItemStack(Material.LAPIS_LAZULI,32), WEIGHT_4);
-        addItemWithWeight(new ItemStack(Material.IRON_INGOT, 64), WEIGHT_4);
-
-        addItemWithWeight(new ItemStack(Material.EXPERIENCE_BOTTLE,8), WEIGHT_5);
-        addItemWithWeight(new ItemStack(Material.EXPERIENCE_BOTTLE,16), WEIGHT_5);
+        addItemWithWeight(new ItemStack(Material.ELYTRA,1), 1);
+        addItemWithWeight(new ItemStack(Material.NETHERITE_INGOT,2), 2);
+        addItemWithWeight(new ItemStack(Material.DIAMOND,4), 3);
+        addItemWithWeight(new ItemStack(Material.GOLD_INGOT,16), 4);
+        addItemWithWeight(new ItemStack(Material.LAPIS_LAZULI,16), 5);
+        addItemWithWeight(new ItemStack(Material.EXPERIENCE_BOTTLE,16), 6);
+        addItemWithWeight(new ItemStack(Material.EXPERIENCE_BOTTLE,8), 7);
     }
 
     // アイテムとその重みをリストに追加するメソッド
@@ -64,15 +50,15 @@ public class GachaCommand implements CommandExecutor {
 
         // 最低レベルをクリアしていない場合
         if (level < MIN_LEVEL){
-            p.sendMessage("必要レベルが足りていません。");
-            p.sendMessage("100レベルからガチャを実行できます。");
+            p.sendMessage("The required level is not enough.");
+            p.sendMessage("You can run gacha from "+MIN_LEVEL+" levels.");
             return false;
         }
 
         // インベントリに空きがあるか確認
         if (!hasEmptySlot(p)){
-            p.sendMessage("インベントリに空きがありません。");
-            p.sendMessage("アイテムを整理してください。");
+            p.sendMessage("Inventory is full.");
+            p.sendMessage("Keep your items organized.");
             return false;
         }
 
@@ -136,12 +122,12 @@ public class GachaCommand implements CommandExecutor {
                 subtractLevels(player);
 
                 inventory.addItem(randomItem);
-                player.sendMessage("アイテムをゲットしました: " + randomItem.getType());
+                player.sendMessage("You got an item: " + randomItem.getType());
             } else {
-                player.sendMessage("インベントリに空きがありません。アイテムを整理してください。");
+                player.sendMessage("Inventory is full. Keep your items organized. Inventory is full. Keep your items organized.");
             }
         } else {
-            player.sendMessage("アイテムが取得できませんでした。");
+            player.sendMessage("The item could not be retrieved.");
         }
     }
 
