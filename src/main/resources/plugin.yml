@@ -1,0 +1,10 @@
+name: mineGacha
+version: '${version}'
+main: net.isksss.mc.minegacha.MineGacha
+api-version: '1.20'
+
+commands:
+  gacha:
+    aliases: [g]
+    description: gacha
+    usage: /gacha
